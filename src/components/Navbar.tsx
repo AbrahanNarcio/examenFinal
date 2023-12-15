@@ -13,7 +13,7 @@ function Navbar() {
         <nav className='bg-slate-900 flex items-center py-3 justify-between px-24 text-white'>
             <Link href="/">
                 <h1>
-                    ExamenNarcio
+                    Eventual
                 </h1>
             </Link>
 
@@ -25,7 +25,7 @@ function Navbar() {
 
             <Link href="/tasks/new">
                 <h1>
-                    Crear Entidad
+                    Crear Evento
                 </h1>
             </Link>
 

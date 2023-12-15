@@ -14,10 +14,6 @@ async function HomePage() {
     <div className='grid grid-cols-3 gap-2'>
       {/* {JSON.stringify(tasks)} */}
       {tasks.map(task => (
-        // <div key={task._id}>
-        //   <h3>{task.title}</h3>
-        //   <p>{task.description}</p>
-        // </div>
         <TaskCard task={task} key={task._id}/>
       ))}  
     </div>  

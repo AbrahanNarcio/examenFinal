@@ -4,7 +4,7 @@ import Task from '@/models/Task'
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher'
 
 export async function GET(request: Request, { params }: Params) {
-    connectDB()
+    // connectDB()
     // const taskFound = await Task.findOne({
     //     title: params.id
     // })
@@ -18,7 +18,7 @@ export async function GET(request: Request, { params }: Params) {
 }
 
 export async function DELETE(request: Request, { params }: Params) {
-    connectDB()
+    // connectDB()
     const taskDeleted = await Task.findByIdAndDelete(params.id)
     if (!taskDeleted) return NextResponse.json({
         message: "Task not found",
@@ -29,7 +29,7 @@ export async function DELETE(request: Request, { params }: Params) {
 }
 
 export async function PUT(request: Request, { params }: Params) {
-    connectDB()
+    // connectDB()
     const data = await request.json()
     const taskUpdated = await Task.findByIdAndUpdate(params.id, data, {
         new: true

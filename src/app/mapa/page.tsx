@@ -4,10 +4,10 @@ import MapWithMarkers from '@/components/MapWithMarkers';
 import { useState } from 'react';
 
 export default function NearbyLocationPage() {
-  const [position, setPosition] = useState<[number, number]>([36.715992, -4.477982])
-  const [positions, setPositions] = useState<{lat: number, lon: number}[]>([])
-  const [address, setAddress] = useState<string>("")
-  const [message, setMessage] = useState<string>("")
+  const [position, setPosition] = useState<[number, number]>([36.715992, -4.477982]);
+  const [positions, setPositions] = useState<{lat: number, lon: number}[]>([]);
+  const [address, setAddress] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   const onFormSubmit = async (e: React.FormEvent<HTMLFormElement> | null) => {
     if (e) e.preventDefault();
@@ -35,7 +35,7 @@ export default function NearbyLocationPage() {
           className="flex flex-col items-center space-y-4"
           onSubmit={onFormSubmit}
         >
-          <label htmlFor="address">Direccion</label>
+          <label htmlFor="address">Coordenadas</label>
           <input
             className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
             type="text"

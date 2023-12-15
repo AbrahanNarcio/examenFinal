@@ -1,12 +1,21 @@
 "use client"
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { useSession } from 'next-auth/react'
 
 function FormPage() {
+    const { data: session } = useSession();
+
     const [newTask, setNewTask] = useState({
-        title: "",
-        description: "",
+        nombre: "",
+        lugar: "",
+        lat: "",
+        lon: "",
+        organizador: "",
+        imagen: "",
+        fecha_inicio: "",
     });
+
     const router = useRouter();
     const params = useParams();
 
@@ -15,8 +24,13 @@ function FormPage() {
         const data = await res.json();
         console.log(data);
         setNewTask({
-            title: data.title,
-            description: data.description,
+            nombre: data.nombre,
+            lugar: data.lugar,
+            lat: data.lat,
+            lon: data.lon,
+            organizador: data.organizador,
+            imagen: data.imagen,
+            fecha_inicio: data.fecha_inicio,
         })
     }
 
@@ -53,7 +67,7 @@ function FormPage() {
     }
 
     const handleDelete = async () => {
-        if (window.confirm("Seguro que quieres eliminarlo?")) {
+        if (window.confirm("¿Seguro que quieres eliminar el evento?")) {
             const res = await fetch(`/api/tasks/${params.id}`, {
                 method: "DELETE",
             });
@@ -69,7 +83,7 @@ function FormPage() {
         } else {
             updateTask();
         }
-        await createTask();
+        //await createTask();
     }
 
     const handleChange = (
@@ -84,12 +98,13 @@ function FormPage() {
     }, [])
 
     return (
+        
         <div className="h-[calc(100vh-7rem)] flex justify-center items-center">
             <form onSubmit={handleSubmit}>
                 <header className='flex justify-between'>
                     <h1 className="font-bold text-3xl">
                         {
-                            !params.id ? "Crear" : "Actualizar"
+                            !params.id ? "Crear Evento" : "Actualizar Evento"
                         }
                     </h1>
 
@@ -98,20 +113,45 @@ function FormPage() {
                         className="bg-red-500 px-3 px-1 rounded-md"
                         onClick={handleDelete}
                     >
-                        Eliminar
+                        Eliminar Evento
                     </button>
                 </header>
 
-                <input type="text" name="title" placeholder="Title"
+                <input type="text" name="nombre" placeholder="Nombre Evento"
                     className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
                     onChange={handleChange}
-                    value={newTask.title}
+                    value={newTask.nombre}
                 />
-                <textarea name="description" rows={3} placeholder="Description"
+                <textarea name="lugar" rows={3} placeholder="Lugar Evento"
                     className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
                     onChange={handleChange}
-                    value={newTask.description}
+                    value={newTask.lugar}
                 ></textarea>
+                <input type="text" name="fecha_inicio" placeholder="Fecha Inicio Evento (aaaa-MM-dd HH:mm:ss)"
+                    className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
+                    onChange={handleChange}
+                    value={newTask.fecha_inicio}
+                />
+                <input type="hidden" name="lat" placeholder=""
+                    className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
+                    onChange={handleChange}
+                    value={newTask.lat}
+                />
+                <input type="hidden" name="lon" placeholder=""
+                    className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
+                    onChange={handleChange}
+                    value={newTask.lon}
+                />
+                <input type="hidden" name="organizador" placeholder=""
+                    className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
+                    onChange={handleChange}
+                    value={newTask.organizador}
+                />
+                <input type="hidden" name="" placeholder=""
+                    className="bg-gray-800 border-2 w-full p-4 rounded-lg my-4"
+                    onChange={handleChange}
+                    value={newTask.imagen}
+                />
                 <button 
                     type="submit"
                     className="bg-green-600 hover::bg-green-700 text-white font-bold px-4 py-2 rounded-lg"
