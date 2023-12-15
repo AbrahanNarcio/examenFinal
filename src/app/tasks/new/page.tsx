@@ -29,7 +29,6 @@ function FormPage() {
                     "Content-Type": "application/json"
                 },
             })
-            const data = await res.json()
             if (res.status == 200) {
                 router.push('/');
                 router.refresh();
@@ -47,9 +46,9 @@ function FormPage() {
                 "Content-Type": "application/json",
             }
         });
-        const data = await res.json()
-        console.log(data)
-        router.push("/");
+        // const data = await res.json()
+        // console.log(data)
+        router.push('/');
         router.refresh();
     }
 
@@ -70,7 +69,7 @@ function FormPage() {
         } else {
             updateTask();
         }
-        await createTask()
+        await createTask();
     }
 
     const handleChange = (
@@ -80,7 +79,7 @@ function FormPage() {
     useEffect(() => {
         console.log(params)
         if (params.id) {
-            getTask()
+            getTask();
         }
     }, [])
 
