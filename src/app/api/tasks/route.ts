@@ -8,7 +8,7 @@ export async function GET() {
     return NextResponse.json(tasks);
 }
 
-export async function POST(request) {
+export async function POST(request: Request) {
     connectDB()
     try {
         const data = await request.json()
@@ -16,8 +16,8 @@ export async function POST(request) {
         const savedTask = await newTask.save()
         return NextResponse.json(savedTask)
     } catch (error) {
-        return NextResponse.json(error.message, {
-            status: 400
-        })
+        // return NextResponse.json(error.message, {
+        //     status: 400
+        // })
     }
 }
